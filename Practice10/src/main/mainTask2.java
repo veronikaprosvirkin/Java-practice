@@ -41,5 +41,34 @@ public class mainTask2 {
 
         System.out.println("===Conflicts===\n");
         eventLab.findConflicts(events);
+
+        //task 3. test sorting
+
+        LambdaRefactorLab sorterLab = new LambdaRefactorLab();
+
+        System.out.println("===Sorted using anonymous class===");
+        sorterLab.sortAnonymous(events);
+        System.out.println("===Sorted using lambda===");
+        sorterLab.sortLambda(events);
+        System.out.println("===Sorted using method reference===");
+        sorterLab.sortMethodRef(events);
+
+        System.out.println("===Sorted Events===\n");
+        for (Event e : events) {
+            System.out.println(e.label() + " -> " + e.getStart());
+        }
+
+        //task 4
+        System.out.println("===DateTimeLab===\n");
+        DateTimeLab timeLab = new DateTimeLab();
+
+
+        Event first = events.get(0); // Breakfast (Kyiv)
+        Event second = events.get(2); // Board Games (Amsterdam)
+
+        System.out.println("=== DateTimeLab Tests ===");
+        System.out.println("Instant: " + timeLab.toInstant(first));
+        System.out.println("Minutes between: " + timeLab.minutesBetween(first, second) + " min");
+        System.out.println("Breakfast time in Tokyo: " + timeLab.startInZone(first, "Asia/Tokyo"));
     }
 }
