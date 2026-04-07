@@ -1,0 +1,6 @@
+id,email,status,amountCents
+1,anna@gmail.com,PAID,1500
+2,max@yahoo.com,NEW,300
+3,broken_row_without_enough_commas
+4,john@ukr.net,PENDING,500
+5,olena@gmail.com,FAILED,1200.50
