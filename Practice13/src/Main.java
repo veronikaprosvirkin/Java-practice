@@ -1,5 +1,8 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.ArrayBlockingQueue;
+import java.util.concurrent.BlockingQueue;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Supplier;
 
 public class Main {
@@ -24,7 +27,23 @@ public class Main {
         System.out.println("\n=========Task 3==========");
         runTest();
 
+        System.out.println("\n=========Task 4==========");
+        BlockingQueue<SupportTicket> queue = new ArrayBlockingQueue<>(50);
+        ConcurrentHashMap<String, Integer> topicCount = new ConcurrentHashMap<>();
+        int customerCount = 5;
+        Thread producer = new Thread(new TicketProducer(queue, customerCount));
+        producer.start();
+        List<Thread> consumers = new ArrayList<>();
+        for (int i = 0; i < customerCount; i++) {
+            Thread consumer = new Thread(new TicketConsumer(queue, topicCount));
+            consumer.start();
+            consumers.add(consumer);
+        }
+        for (Thread c : consumers) {
+                c.join();
 
+        }
+        System.out.println("Topic counts: " + topicCount);
     }
     static void runTest() throws InterruptedException {
         Account account1 = new Account(1,2000);
